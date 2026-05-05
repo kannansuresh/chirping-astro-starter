@@ -15,6 +15,7 @@ import rehypeExternalLinks from 'rehype-external-links';
 import rehypeKatex from 'rehype-katex';
 import remarkGfm from 'remark-gfm';
 import remarkMath from 'remark-math';
+import { remarkAsHtml } from './src/plugins/remark-ashtml.ts';
 
 import { SITE } from './src/config';
 
@@ -128,7 +129,7 @@ export default defineConfig({
     // loaded ONLY on pages that opt in via `math: true` in frontmatter,
     // through `<MathStyles />` in the post / page layouts. This keeps the
     // CSS (~25kB gzipped) off pages that don't need it.
-    remarkPlugins: [remarkGfm, remarkMath],
+    remarkPlugins: [remarkAsHtml, remarkGfm, remarkMath],
     rehypePlugins: [
       rehypeKatex,
       rehypeSlug,
