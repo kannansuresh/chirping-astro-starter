@@ -1,3 +1,5 @@
+import avatarImg from './assets/images/site/avatar.svg';
+import ogDefaultImg from './assets/images/site/og-default.svg';
 import type { SiteConfig, NavItem, SocialLink, GiscusConfig } from './types/config';
 
 /**
@@ -5,6 +7,12 @@ import type { SiteConfig, NavItem, SocialLink, GiscusConfig } from './types/conf
  * Edit values here to rebrand the theme. All values are typed and consumed
  * across layouts, components, RSS, sitemap, and SEO.
  */
+
+// Export imported site images for use in components
+export const SITE_IMAGES = {
+  avatar: avatarImg,
+  ogDefault: ogDefaultImg,
+} as const;
 
 export const locales = ['en', 'fr'] as const;
 export type Locale = (typeof locales)[number];
@@ -48,11 +56,11 @@ export const SITE: SiteConfig = {
   author: {
     name: 'Chirping Astro',
     url: GITHUB_HANDLE ? `https://github.com/${GITHUB_HANDLE}` : undefined,
-    avatar: '/images/avatar.svg',
+    avatar: avatarImg.src,
     bio: 'A text-focused Astro V6 theme.',
   },
-  /** Default OG image relative to /public. */
-  defaultOgImage: '/images/og-default.svg',
+  /** Default OG image. */
+  defaultOgImage: ogDefaultImg.src,
   /** Number of posts per page on listings. */
   postsPerPage: 8,
   /** Display ISO 8601 date format if true, otherwise locale-aware. */

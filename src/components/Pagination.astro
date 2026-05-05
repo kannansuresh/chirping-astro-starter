@@ -37,15 +37,19 @@ if (lastPage > 1) push(lastPage);
   aria-label={`${t('pagination.page')} ${currentPage} ${t('pagination.of')} ${lastPage}`}
   class="my-10 flex items-center justify-between"
 >
-  <a
-    rel="prev"
-    href={prev ?? '#'}
-    aria-disabled={prev ? undefined : 'true'}
-    class:list={['btn btn-sm btn-ghost gap-1', prev ? '' : 'pointer-events-none opacity-40']}
-  >
-    <Icon name="lucide:arrow-up" width={14} height={14} class="-rotate-90" />
-    {t('pagination.previous')}
-  </a>
+  {
+    prev ? (
+      <a rel="prev" href={prev} class="btn btn-sm btn-ghost gap-1">
+        <Icon name="lucide:arrow-up" width={14} height={14} class="-rotate-90" />
+        {t('pagination.previous')}
+      </a>
+    ) : (
+      <button disabled class="btn btn-sm btn-ghost pointer-events-none gap-1 opacity-40">
+        <Icon name="lucide:arrow-up" width={14} height={14} class="-rotate-90" />
+        {t('pagination.previous')}
+      </button>
+    )
+  }
 
   <ul class="join">
     {
@@ -67,13 +71,17 @@ if (lastPage > 1) push(lastPage);
     }
   </ul>
 
-  <a
-    rel="next"
-    href={next ?? '#'}
-    aria-disabled={next ? undefined : 'true'}
-    class:list={['btn btn-sm btn-ghost gap-1', next ? '' : 'pointer-events-none opacity-40']}
-  >
-    {t('pagination.next')}
-    <Icon name="lucide:arrow-up" width={14} height={14} class="rotate-90" />
-  </a>
+  {
+    next ? (
+      <a rel="next" href={next} class="btn btn-sm btn-ghost gap-1">
+        {t('pagination.next')}
+        <Icon name="lucide:arrow-up" width={14} height={14} class="rotate-90" />
+      </a>
+    ) : (
+      <button disabled class="btn btn-sm btn-ghost pointer-events-none gap-1 opacity-40">
+        {t('pagination.next')}
+        <Icon name="lucide:arrow-up" width={14} height={14} class="rotate-90" />
+      </button>
+    )
+  }
 </nav>

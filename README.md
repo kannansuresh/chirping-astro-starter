@@ -34,7 +34,7 @@ Open [http://localhost:4321](http://localhost:4321) to see your site.
 
 1. Edit `src/config.ts` to set your site title, author name, and social links.
 2. Copy `.env.example` to `.env` and fill in your values.
-3. Replace the avatar in `public/images/` with your own.
+3. Replace the avatar in `src/assets/images/site/` with your own.
 4. Start writing posts in `src/content/posts/en/`.
 
 ## Writing Posts
@@ -150,15 +150,15 @@ The language switcher will disappear and all `hreflang` tags are omitted.
 
 ## Customization
 
-| What                            | Where                                |
-| ------------------------------- | ------------------------------------ |
-| Site title, description, author | `src/config.ts` → `SITE`             |
-| Navigation links                | `src/config.ts` → `NAV`              |
-| Social links                    | `src/config.ts` → `SOCIAL`           |
-| Avatar image                    | `public/images/avatar.svg`           |
-| Default OG image                | `public/images/og-default.svg`       |
-| Global styles                   | `src/styles/global.css`              |
-| Theme colors                    | daisyUI theme tokens in `global.css` |
+| What                            | Where                                   |
+| ------------------------------- | --------------------------------------- |
+| Site title, description, author | `src/config.ts` → `SITE`                |
+| Navigation links                | `src/config.ts` → `NAV`                 |
+| Social links                    | `src/config.ts` → `SOCIAL`              |
+| Avatar image                    | `src/assets/images/site/avatar.svg`     |
+| Default OG image                | `src/assets/images/site/og-default.svg` |
+| Global styles                   | `src/styles/global.css`                 |
+| Theme colors                    | daisyUI theme tokens in `global.css`    |
 
 ## Commands
 
