@@ -383,14 +383,7 @@
   .chirpy-card-link.has-image {
     @apply md:grid-cols-12;
   }
-  @media (min-width: 768px) {
-    .chirpy-card-link.has-image.fixed-size {
-      height: 14rem; /* 224px — matches Chirpy's listing height */
-    }
-    .chirpy-card-link.has-image.dynamic-size {
-      min-height: 14rem;
-    }
-  }
+
   .chirpy-card-body {
     @apply flex min-w-0 flex-col p-4 sm:p-5 md:col-span-7 md:p-6;
   }
@@ -429,10 +422,10 @@
     }
   }
   .chirpy-card-image-wrap {
-    @apply order-first overflow-hidden md:order-last md:col-span-5 md:h-full;
+    @apply order-first overflow-hidden md:order-last md:col-span-5 md:flex md:flex-col;
   }
   .chirpy-card-image {
-    @apply h-44 w-full object-cover md:h-full md:rounded-r-md;
+    @apply h-44 w-full object-cover md:min-h-0 md:flex-1 md:rounded-r-md;
   }
 }
 

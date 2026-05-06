@@ -8,9 +8,10 @@ import { Icon } from 'astro-icon/components';
 interface Props {
   post: Post;
   locale: Locale;
+  prioritizeLcp?: boolean;
 }
 
-const { post, locale } = Astro.props;
+const { post, locale, prioritizeLcp = false } = Astro.props;
 const href = postPath(post);
 const heroAsset = heroImage(post);
 const hasImage = Boolean(heroAsset) && shouldShowHero(post);
@@ -35,6 +36,7 @@ const isDynamicCardHeight = post.data.dynamicPostCardHeight ?? SITE.dynamicPostC
             alt={heroAlt}
             class="chirpy-card-image"
             loading="eager"
+            fetchpriority={prioritizeLcp ? 'high' : 'auto'}
             widths={[320, 480, 640, 800]}
             sizes="(max-width: 640px) 100vw, 320px"
             quality={75}
@@ -57,7 +59,7 @@ const isDynamicCardHeight = post.data.dynamicPostCardHeight ?? SITE.dynamicPostC
         {post.data.description}
       </p>
 
-      <div class="text-base-content/70 mt-auto flex items-end justify-between gap-2 text-xs">
+      <div class="text-base-content/70 mt-3 flex items-end justify-between gap-2 text-xs">
         <div class="flex flex-wrap items-center gap-x-3 gap-y-1">
           <span class="inline-flex items-center gap-1">
             <Icon name="lucide:clock" width={12} height={12} />

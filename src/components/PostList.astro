@@ -20,8 +20,8 @@ const t = useTranslations(locale);
     </p>
   ) : (
     <div id="post-list">
-      {posts.map((post) => (
-        <PostCard post={post} locale={locale} />
+      {posts.map((post, index) => (
+        <PostCard post={post} locale={locale} prioritizeLcp={index === 0} />
       ))}
     </div>
   )
