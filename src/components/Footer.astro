@@ -1,5 +1,5 @@
 ---
-import { SITE, REPO, type Locale } from '../config';
+import { SITE, type Locale } from '../config';
 import { localizedPath, useTranslations } from '../i18n/utils';
 
 interface Props {
@@ -9,6 +9,14 @@ interface Props {
 const { locale } = Astro.props;
 const t = useTranslations(locale);
 const year = new Date().getFullYear();
+const footerLeftText = SITE.footer.leftText?.trim();
+const footerRightText = SITE.footer.rightText?.trim();
+const showPrivacyPolicy = SITE.footer.showPrivacyPolicy ?? SITE.showPrivacyPolicy;
+const showThemeCredits = SITE.footer.showThemeCredits ?? true;
+const shouldRenderRightFooter = Boolean(footerRightText) || showThemeCredits;
+const resolvedLeftText = footerLeftText
+  ?.replaceAll('{year}', String(year))
+  .replaceAll('{author}', SITE.author.name);
 ---
 
 <footer
@@ -16,12 +24,21 @@ const year = new Date().getFullYear();
   class="border-base-300 text-base-content/70 mt-10 flex flex-col gap-1 border-t py-6 text-sm lg:flex-row lg:items-center lg:justify-between"
 >
   <p>
-    © <time>{year}</time>{' '}
-    <a href={SITE.author.url ?? '#'} rel="noopener" class="hover:text-primary">{SITE.author.name}</a
-    >.{' '}
-    {t('footer.copyright')}
     {
-      SITE.showPrivacyPolicy && (
+      resolvedLeftText ? (
+        resolvedLeftText
+      ) : (
+        <>
+          © <time>{year}</time>{' '}
+          <a href={SITE.author.url ?? '#'} rel="noopener" class="hover:text-primary">
+            {SITE.author.name}
+          </a>
+          . {t('footer.copyright')}
+        </>
+      )
+    }
+    {
+      showPrivacyPolicy && (
         <>
           {' · '}
           <a href={localizedPath('/privacy', locale)} class="hover:text-primary">
@@ -31,10 +48,35 @@ const year = new Date().getFullYear();
       )
     }
   </p>
-  <p>
-    {t('footer.poweredBy')}{' '}
-    <a href="https://astro.build" rel="noopener" class="hover:text-primary">Astro</a>{' '}
-    · {t('footer.theme')}{' '}
-    <a href={REPO.url} rel="noopener" class="hover:text-primary"> Chirping Astro </a>
-  </p>
+  {
+    shouldRenderRightFooter && (
+      <p>
+        {footerRightText ? (
+          <>
+            {footerRightText}
+            {showThemeCredits && (
+              <>
+                {' · '}
+                {t('footer.theme')}{' '}
+                <a href={SITE.footer.themeUrl} rel="noopener" class="hover:text-primary">
+                  {SITE.footer.themeName}
+                </a>
+              </>
+            )}
+          </>
+        ) : (
+          <>
+            {t('footer.poweredBy')}{' '}
+            <a href="https://astro.build" rel="noopener" class="hover:text-primary">
+              Astro
+            </a>{' '}
+            · {t('footer.theme')}{' '}
+            <a href={SITE.footer.themeUrl} rel="noopener" class="hover:text-primary">
+              {SITE.footer.themeName}
+            </a>
+          </>
+        )}
+      </p>
+    )
+  }
 </footer>

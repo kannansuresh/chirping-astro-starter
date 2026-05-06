@@ -29,12 +29,13 @@ const GITHUB_HANDLE = import.meta.env.PUBLIC_GITHUB_HANDLE ?? '';
 const GITHUB_REPO = import.meta.env.PUBLIC_GITHUB_REPO ?? 'chirping-astro';
 const TWITTER_HANDLE = import.meta.env.PUBLIC_TWITTER_HANDLE ?? '';
 const CONTACT_EMAIL = import.meta.env.PUBLIC_CONTACT_EMAIL ?? '';
+const THEME_REPO_URL = 'https://github.com/kannansuresh/chirping-astro';
 
 /**
- * Public GitHub coordinates of the deployed source. Used by the footer's
- * "Theme" link and anywhere a canonical repo URL is needed. When
+ * Public GitHub coordinates of the deployed source. Useful for custom links
+ * and integrations that need a repository URL. When
  * `PUBLIC_GITHUB_HANDLE` is unset, `url` falls back to a safe default so
- * the footer never points at a 404.
+ * generated links never point at a 404.
  */
 export const REPO = {
   handle: GITHUB_HANDLE,
@@ -75,6 +76,27 @@ export const SITE: SiteConfig = {
   autoOgImage: true,
   /** Show a link to the Privacy Policy page in the footer. */
   showPrivacyPolicy: true,
+  /** Footer text/link controls. */
+  footer: {
+    /**
+     * Optional full override for the left footer line. Supports {year} and {author}.
+     * Default when undefined: "© {year} {author}. All rights reserved." (+ Privacy Policy link if enabled).
+     */
+    leftText: undefined,
+    /**
+     * Optional custom text before the theme link on the right footer line.
+     * Default when undefined: "Powered by Astro · Theme <themeName>".
+     */
+    rightText: undefined,
+    /** Whether to show the Privacy Policy link in the footer. */
+    showPrivacyPolicy: true,
+    /** Whether to show theme credits in the footer right side. Theme <themeName> */
+    showThemeCredits: true,
+    /** Label for the theme repository link in the right footer line. */
+    themeName: 'Chirping Astro',
+    /** Default upstream theme repository. */
+    themeUrl: THEME_REPO_URL,
+  },
 
   // ==========================================
   // ❗ CAN BREAK THINGS (EDIT WITH CAUTION)
