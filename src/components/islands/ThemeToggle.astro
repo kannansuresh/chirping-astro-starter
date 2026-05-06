@@ -34,12 +34,14 @@ const t = useTranslations(locale);
     return (document.documentElement.getAttribute('data-theme') as Theme) ?? 'chirpy-light';
   }
 
-  function commitTheme(theme: Theme): void {
+  function commitTheme(theme: Theme, save = true): void {
     document.documentElement.setAttribute('data-theme', theme);
-    try {
-      localStorage.setItem(STORAGE_KEY, theme);
-    } catch {
-      /* ignore */
+    if (save) {
+      try {
+        localStorage.setItem(STORAGE_KEY, theme);
+      } catch {
+        /* ignore */
+      }
     }
     updateIcons(theme);
     document.dispatchEvent(new CustomEvent('theme-change', { detail: { theme } }));
@@ -111,7 +113,9 @@ const t = useTranslations(locale);
       } catch {
         /* ignore */
       }
-      applyTheme(e.matches ? 'chirpy-dark' : 'chirpy-light');
+      // Apply visually only — do not persist so the system preference
+      // remains the source of truth until the user explicitly toggles.
+      commitTheme(e.matches ? 'chirpy-dark' : 'chirpy-light', false);
     });
   }
 
