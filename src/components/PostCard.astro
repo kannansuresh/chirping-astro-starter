@@ -35,10 +35,10 @@ const isDynamicCardHeight = post.data.dynamicPostCardHeight ?? SITE.dynamicPostC
             src={heroAsset!}
             alt={heroAlt}
             class="chirpy-card-image"
-            loading="eager"
+            loading={prioritizeLcp ? 'eager' : 'lazy'}
             fetchpriority={prioritizeLcp ? 'high' : 'auto'}
-            widths={[320, 480, 640, 800]}
-            sizes="(max-width: 640px) 100vw, 320px"
+            widths={[384, 768, 960]}
+            sizes="(max-width: 767px) 100vw, 378px"
             quality={75}
           />
         </div>

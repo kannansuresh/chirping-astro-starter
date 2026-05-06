@@ -1,5 +1,5 @@
 // @ts-check
-import { defineConfig } from 'astro/config';
+import { defineConfig, fontProviders } from 'astro/config';
 import process from 'node:process';
 import { readFileSync, writeFileSync, readdirSync } from 'node:fs';
 import { join } from 'node:path';
@@ -220,4 +220,89 @@ export default defineConfig({
   experimental: {
     contentIntellisense: true,
   },
+
+  fonts: [
+    // Source Sans 3 — main UI font from @fontsource/source-sans-3 npm package
+    {
+      name: 'Source Sans 3',
+      cssVariable: '--font-source-sans-3',
+      provider: fontProviders.local(),
+      options: {
+        variants: [
+          {
+            weight: '400',
+            style: 'normal',
+            src: [
+              './node_modules/@fontsource/source-sans-3/files/source-sans-3-latin-400-normal.woff2',
+            ],
+          },
+          {
+            weight: '600',
+            style: 'normal',
+            src: [
+              './node_modules/@fontsource/source-sans-3/files/source-sans-3-latin-600-normal.woff2',
+            ],
+          },
+          {
+            weight: '700',
+            style: 'normal',
+            src: [
+              './node_modules/@fontsource/source-sans-3/files/source-sans-3-latin-700-normal.woff2',
+            ],
+          },
+          {
+            weight: '900',
+            style: 'normal',
+            src: [
+              './node_modules/@fontsource/source-sans-3/files/source-sans-3-latin-900-normal.woff2',
+            ],
+          },
+        ],
+      },
+    },
+    // Lato — secondary font from @fontsource/lato npm package
+    {
+      name: 'Lato',
+      cssVariable: '--font-lato',
+      provider: fontProviders.local(),
+      options: {
+        variants: [
+          {
+            weight: '300',
+            style: 'normal',
+            src: ['./node_modules/@fontsource/lato/files/lato-latin-300-normal.woff2'],
+          },
+          {
+            weight: '400',
+            style: 'normal',
+            src: ['./node_modules/@fontsource/lato/files/lato-latin-400-normal.woff2'],
+          },
+        ],
+      },
+    },
+    // JetBrains Mono — monospace font from @fontsource/jetbrains-mono npm package
+    {
+      name: 'JetBrains Mono',
+      cssVariable: '--font-jetbrains-mono',
+      provider: fontProviders.local(),
+      options: {
+        variants: [
+          {
+            weight: '400',
+            style: 'normal',
+            src: [
+              './node_modules/@fontsource/jetbrains-mono/files/jetbrains-mono-latin-400-normal.woff2',
+            ],
+          },
+          {
+            weight: '600',
+            style: 'normal',
+            src: [
+              './node_modules/@fontsource/jetbrains-mono/files/jetbrains-mono-latin-600-normal.woff2',
+            ],
+          },
+        ],
+      },
+    },
+  ],
 });

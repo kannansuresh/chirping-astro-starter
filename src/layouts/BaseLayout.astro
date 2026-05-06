@@ -1,6 +1,7 @@
 ---
 import '../styles/global.css';
 
+import { Font } from 'astro:assets';
 import Sidebar from '../components/Sidebar.astro';
 import Topbar from '../components/Topbar.astro';
 import Footer from '../components/Footer.astro';
@@ -97,26 +98,11 @@ const meta: SeoMeta =
       title={`${SITE.title} (FR)`}
       href={withBase('/fr/rss.xml')}
     />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      rel="preload"
-      as="style"
-      href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600;700;900&family=Lato:wght@300;400&family=JetBrains+Mono:wght@400;600&display=swap"
-    />
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600;700;900&family=Lato:wght@300;400&family=JetBrains+Mono:wght@400;600&display=swap"
-      media="print"
-      onload="this.media='all'"
-    />
-    <noscript>
-      <link
-        rel="stylesheet"
-        href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600;700;900&family=Lato:wght@300;400&family=JetBrains+Mono:wght@400;600&display=swap"
-      />
-    </noscript>
     <SEO meta={meta} />
+    {/* Custom fonts configured via Astro Fonts API */}
+    <Font cssVariable="--font-source-sans-3" />
+    <Font cssVariable="--font-lato" />
+    <Font cssVariable="--font-jetbrains-mono" preload />
     <ClientRouter />
     {/* Apply persisted theme as early as possible to avoid FOUC. */}
     <script is:inline>
